@@ -15,6 +15,7 @@ def coupon_apply(request):
         try:
             coupon = Coupon.objects.get(code__iexact=code, valid_from__lte=now , valid_to__gte=now, active=True)
             request.session['coupon_id'] = coupon.id
+            print("coupon_id added to session")
         except Coupon.DoesNotExist:
             messages.error(request,'The time for this coupon is passed.')
             request.session['coupon_id'] = None
